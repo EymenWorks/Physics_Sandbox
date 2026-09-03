@@ -1,3 +1,6 @@
+#ifndef VECTOR2_H
+#define VECTOR2_H
+
 #include <cmath>
 #include <stdexcept>
 
@@ -17,3 +20,5 @@ class Vector2 {
 		float length() const;
 		Vector2 normalize() const;
 };
+
+#endif
