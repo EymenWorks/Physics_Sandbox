@@ -27,4 +27,12 @@ Vector2 Ball::getPosition() const {
 	return position;
 }
 
+Vector2 Ball::getVelocity() const {
+	return velocity;
+}
+
+float Ball::getMass() const {
+	return mass;
+}
+
 

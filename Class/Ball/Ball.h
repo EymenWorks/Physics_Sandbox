@@ -16,6 +16,8 @@ class Ball {
 		void updatePosition(Vector2 velocity2, float dt);
 		void applyForce(Vector2 force2, float dt);
 		Vector2 getPosition() const;
+		Vector2 getVelocity() const;
+		float getMass() const;
 };
 
 #endif
