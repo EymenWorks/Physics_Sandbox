@@ -1,11 +1,12 @@
 #include "Ball.h"
 
-Ball::Ball(float mass2) : position(0,0), velocity(0,0), acceleration(0,0), force(0,0){
-	mass = mass2;
+Ball::Ball(float x, float y) : position(0,0), velocity(0,0), acceleration(0,0), force(0,0){
+	position.setX(x);
+	position.setY(y);
 }
 
 void Ball::calculateAcceleration(Vector2 force2, float mass2){
-	acceleration = force / mass;
+	acceleration = force2 / mass2;
 }
 
 void Ball::updateVelocity(Vector2 acceleration2, float dt){
@@ -31,8 +32,24 @@ Vector2 Ball::getVelocity() const {
 	return velocity;
 }
 
+void Ball::setMass(float mass){
+	this->mass = mass;
+}
+
 float Ball::getMass() const {
 	return mass;
 }
 
+float Ball::getCOR() const {
+	return COR;
+}
+
+void Ball::setVelocity(Vector2 velocity2){
+	velocity = velocity2;
+}
+
+void Ball::setPosition(float x, float y){
+	position.setX(x);
+	position.setY(y);
+}
 
