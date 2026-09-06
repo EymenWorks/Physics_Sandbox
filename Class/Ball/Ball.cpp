@@ -17,8 +17,11 @@ void Ball::updatePosition(Vector2 velocity2, float dt){
 	position = position + (velocity2 * dt);
 }
 
-void Ball::applyForce(Vector2 force2, float dt){
-	force = force2;
+void Ball::addForce(Vector2 force_type){
+	force = force + force_type;
+}
+
+void Ball::applyForce(float dt){
 	calculateAcceleration(force, mass);
 	updateVelocity(acceleration, dt);
 	updatePosition(velocity, dt);
@@ -30,6 +33,10 @@ Vector2 Ball::getPosition() const {
 
 Vector2 Ball::getVelocity() const {
 	return velocity;
+}
+
+Vector2 Ball::getForce() const {
+	return force;
 }
 
 void Ball::setMass(float mass){
@@ -44,6 +51,10 @@ float Ball::getCOR() const {
 	return COR;
 }
 
+float Ball::getCOD() const {
+	return COD;
+}
+
 void Ball::setVelocity(Vector2 velocity2){
 	velocity = velocity2;
 }
@@ -51,5 +62,10 @@ void Ball::setVelocity(Vector2 velocity2){
 void Ball::setPosition(float x, float y){
 	position.setX(x);
 	position.setY(y);
+}
+
+void Ball::setForce(float x, float y){
+	force.setX(x);
+	force.setY(y);
 }
 
