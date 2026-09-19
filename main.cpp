@@ -1,4 +1,4 @@
-#include "Class/Ball/Ball.h"
+#include "Class/PhysicsObject/DynamicObjects/Ball/Ball.h"
 #include "Class/PhysicsWorld/PhysicsWorld.h"
 
 #include <chrono>
@@ -7,10 +7,16 @@
 
 int main (){
 	
+	float positiony;
 	Ball ball(0, 200);
-	ball.setMass(10.0f);
-	PhysicsWorld pw(ball);
 	const std::chrono::milliseconds sleep_time = std::chrono::milliseconds(1000/30); // 30FPS
+	
+	std::cout << "Enter the position y for ground:";
+	std::cin >> positiony;
+	Ground ground(0, positiony);
+	
+	PhysicsWorld pw(ball, ground);
+	
 	for (int i = 0; i < 6000; i++){
 		auto start = std::chrono::steady_clock::now();
 		std::this_thread::sleep_for(sleep_time);

@@ -1,8 +1,6 @@
 #include "Ball.h"
 
-Ball::Ball(float x, float y) : position(0,0), velocity(0,0), acceleration(0,0), force(0,0){
-	position.setX(x);
-	position.setY(y);
+Ball::Ball(float x, float y) : DynamicObjects(x,y) {
 }
 
 void Ball::calculateAcceleration(Vector2 force2, float mass2){

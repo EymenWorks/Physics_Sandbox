@@ -1,10 +1,13 @@
 #include "../Vector2/Vector2.h"
-#include "../Ball/Ball.h"
+#include "../PhysicsObject/DynamicObjects/Ball/Ball.h"
 #include "../CollisionSystem/CollisionSystem.h"
 #include "../DragSystem/DragSystem.h"
+#include "../PhysicsObject/StaticObjects/Ground/Ground.h"
+
 
 class PhysicsWorld {
 	Ball& ball;
+	Ground& ground;
 	Vector2 gravity;
 	Vector2 calculateGravityForce(Vector2 gravity, Ball& ball);
 	Vector2 gravityForce = calculateGravityForce(gravity, ball);
@@ -13,7 +16,7 @@ class PhysicsWorld {
 	Vector2 dragForce;
 	Vector2 netForce;
 	public:
-		PhysicsWorld(Ball& ball);
+		PhysicsWorld(Ball& ball, Ground& ground);
 		void update(float dt);
 		Vector2 getDragForce() const;
 		Vector2 getNetForce() const;
