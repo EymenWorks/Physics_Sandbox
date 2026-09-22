@@ -12,7 +12,7 @@ class DynamicObjects : public PhysicsObject {
 		float mass;
 		const float COR; // Coefficient of restitution
 		const float COD; // Coefficient of drag
-		DynamicObjects(float x, float y);
+		DynamicObjects(float x, float y, float mass, float COR, float COD);
 };
 
 #endif

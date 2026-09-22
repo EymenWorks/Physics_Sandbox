@@ -7,7 +7,7 @@
 
 class Ball : public DynamicObjects {
 	public:
-		Ball (float x, float y);
+		Ball (float x, float y, float mass, float COR, float COD);
 		void calculateAcceleration(Vector2 force2, float mass2);
 		void updateVelocity(Vector2 acceleration2, float dt);
 		void updatePosition(Vector2 velocity2, float dt);

@@ -4,16 +4,59 @@
 #include <chrono>
 #include <thread>
 #include <iostream>
+#include <string>
 
 int main (){
 	
-	float positiony;
-	Ball ball(0, 200);
+	float fVariable;
+	float ballPosition;
+	float ballMass;
+	float cor;
+	float cod;
+	float groundPosition;
+	bool doesDragExist;
+	std::string decision;
 	const std::chrono::milliseconds sleep_time = std::chrono::milliseconds(1000/30); // 30FPS
 	
+	std::cout << "Enter the position y for ball:";
+	std::cin >> ballPosition;
+	
 	std::cout << "Enter the position y for ground:";
-	std::cin >> positiony;
-	Ground ground(0, positiony);
+	std::cin >> groundPosition;
+	Ground ground(0, groundPosition);
+	
+	std::cout << "Enter the mass value of ball:";
+	std::cin >> ballMass;
+	
+	std::cout << "Enter the value of coefficient of restitution:";
+	std::cin >> cor;
+	
+	do {
+		decision = " ";
+		std::cout << "Drag ON/OFF (1:ON, 2:OFF):";
+		std::cin >> decision;
+		if (decision == "1" || decision == "2"){
+			if (decision == "1"){
+				doesDragExist = true;
+				break;
+			} else {
+				doesDragExist = false;
+				break;
+			}
+		} else {
+			std::cout << "Enter only 1 or 2 please!" << "\n";
+			continue;
+		}
+	} while(true);
+	
+	if (doesDragExist){
+		std::cout << "Enter the value of coefficient of drag:";
+		std::cin >> cod;
+	} else {
+		cod = 0;
+	}
+	
+	Ball ball(0, ballPosition, ballMass, cor, cod);
 	
 	PhysicsWorld pw(ball, ground);
 	
@@ -27,6 +70,8 @@ int main (){
 			std::cout << "Attempt: " << i << "\n";
 			std::cout << "Dt: " << elapsed.count() << "\n";
 			std::cout << "COD: " << ball.getCOD() << "\n";
+			std::cout << "COR: " << ball.getCOR() << "\n";
+			std::cout << "Mass: " << ball.getMass() << "\n";
 			std::cout << "Velocity: (" << ball.getVelocity().getX() << ", " << ball.getVelocity().getY() << ")" << "\n";
 			std::cout << "Position: (" << ball.getPosition().getX() << ", " << ball.getPosition().getY() << ")" << "\n";
 			std::cout << "Net Force: (" << pw.getNetForce().getX() << ", " << pw.getNetForce().getY() << ")" << "\n";	
