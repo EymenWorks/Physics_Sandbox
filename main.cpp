@@ -14,8 +14,12 @@ int main (){
 	float cor;
 	float cod;
 	float groundPosition;
+	float windForceX;
+	float windForceY;
+	float gravityY;
 	bool doesDragExist;
-	std::string decision;
+	bool doesWindExist;
+	bool doesGravityExist;
 	const std::chrono::milliseconds sleep_time = std::chrono::milliseconds(1000/30); // 30FPS
 	
 	std::cout << "Enter the position y for ball:";
@@ -32,7 +36,31 @@ int main (){
 	std::cin >> cor;
 	
 	do {
-		decision = " ";
+		std::string decision;
+		std::cout << "Gravity ON/OFF (1:ON, 2:OFF):";
+		std::cin >> decision;
+		if (decision == "1" || decision == "2"){
+			if (decision == "1"){
+				doesGravityExist = true;
+				break;
+			} else {
+				doesGravityExist = false;
+				break;
+			}
+		} else {
+			std::cout << "Enter only 1 or 2 please!" << "\n";
+			continue;
+		}
+	} while(true);
+	
+	if (doesGravityExist){
+		gravityY = -9.8f;
+	} else {
+		gravityY = 0;
+	}
+	
+	do {
+		std::string decision;
 		std::cout << "Drag ON/OFF (1:ON, 2:OFF):";
 		std::cin >> decision;
 		if (decision == "1" || decision == "2"){
@@ -56,9 +84,37 @@ int main (){
 		cod = 0;
 	}
 	
+	do {
+		std::string decision;
+		std::cout << "Wind ON/OFF (1:ON, 2:OFF):";
+		std::cin >> decision;
+		if (decision == "1" || decision == "2"){
+			if (decision == "1"){
+				doesWindExist = true;
+				break;
+			} else {
+				doesWindExist = false;
+				break;
+			}
+		} else {
+			std::cout << "Enter only 1 or 2 please!" << "\n";
+			continue;
+		}
+	} while(true);
+	
+	if (doesWindExist){
+		std::cout << "Enter the  x value of wind force:";
+		std::cin >> windForceX;
+		std::cout << "Enter the y value of wind force:";
+		std::cin >> windForceY;
+	} else {
+		windForceX = 0;
+		windForceY = 0;
+	}
+	
 	Ball ball(0, ballPosition, ballMass, cor, cod);
 	
-	PhysicsWorld pw(ball, ground);
+	PhysicsWorld pw(ball, ground, windForceX, windForceY, gravityY);
 	
 	for (int i = 0; i < 6000; i++){
 		auto start = std::chrono::steady_clock::now();
@@ -76,6 +132,8 @@ int main (){
 			std::cout << "Position: (" << ball.getPosition().getX() << ", " << ball.getPosition().getY() << ")" << "\n";
 			std::cout << "Net Force: (" << pw.getNetForce().getX() << ", " << pw.getNetForce().getY() << ")" << "\n";	
 			std::cout << "Drag Force: (" << pw.getDragForce().getX() << ", " << pw.getDragForce().getY() << ")" << "\n";
+			std::cout << "Wind Force: (" << pw.getWindForce().getX() << ", " << pw.getWindForce().getY() << ")" << "\n";
+			std::cout << "Gravity Force: (" << pw.getGravityForce().getX() << ", " << pw.getGravityForce().getY() << ")" << "\n";
 			std::cout << "\n\n";
 		}
 	}

@@ -4,7 +4,7 @@ Vector2 PhysicsWorld::calculateGravityForce(Vector2 gravity, Ball& ball){
 	return gravity * ball.getMass();
 }
 
-PhysicsWorld::PhysicsWorld(Ball& ball, Ground& ground, float x, float y) : ball(ball), ground(ground), gravity(0.0f, -9.8f), dragForce(0,0), netForce(0,0), windForce(x,y) {}
+PhysicsWorld::PhysicsWorld(Ball& ball, Ground& ground, float x, float y, float gravityY) : ball(ball), ground(ground), gravity(0,gravityY), dragForce(0,0), netForce(0,0), windForce(x,y) {}
 
 void PhysicsWorld::update(float dt){
 	ball.addForce(gravityForce);
@@ -27,4 +27,8 @@ Vector2 PhysicsWorld::getNetForce() const {
 
 Vector2 PhysicsWorld::getWindForce() const {
 	return windForce;
+}
+
+Vector2 PhysicsWorld::getGravityForce() const {
+	return gravityForce;
 }

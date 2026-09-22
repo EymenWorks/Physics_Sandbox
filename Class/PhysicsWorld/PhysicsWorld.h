@@ -17,9 +17,10 @@ class PhysicsWorld {
 	Vector2 dragForce;
 	Vector2 netForce;
 	public:
-		PhysicsWorld(Ball& ball, Ground& ground, float x, float y);
+		PhysicsWorld(Ball& ball, Ground& ground, float x, float y, float gravityY);
 		void update(float dt);
 		Vector2 getDragForce() const;
 		Vector2 getNetForce() const;
 		Vector2 getWindForce() const;
+		Vector2 getGravityForce() const;
 };
